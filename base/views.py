@@ -66,7 +66,7 @@ def registerUser(request):
             'pagename':pagename,
             'form':form,
         }
-    return render(request, 'base/login_registration.html', context)
+    return render(request, 'base/signup.html', context)
 
 
 def homeView(request):
@@ -135,7 +135,9 @@ def createRoomView(request):
     if request.method == "POST":
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False)
+            room.host = request.user
+            room.save()
             return redirect('home')
         else:
             return HttpResponse("Error")
