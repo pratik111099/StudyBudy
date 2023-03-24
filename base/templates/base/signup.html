@@ -12,13 +12,14 @@
           <div class="layout__body">
             <h2 class="auth__tagline">Find your study partner</h2>
 
-            <form class="form" action="#">
+            <form class="form" method="POST" action="#">
+              {% for field in form %}
               <div class="form__group form__group">
-                <label for="fullname">Full Name</label>
-                {{form.username}}
-                <input id="fullname" name="fullname" type="text" placeholder="e.g. Dennis Ivy" />
+                <label for="fullname">{{field.label}}</label>
+                {{field}}
               </div>
-              <div class="form__group form__group">
+              {% endfor %}
+              {% comment %} <div class="form__group form__group">
                 <label for="room_name">Username</label>
                 <input id="username" name="username" type="text" placeholder="e.g. dennis_ivy" />
               </div>
@@ -40,7 +41,7 @@
                   type="password"
                   placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                 />
-              </div>
+              </div> {% endcomment %}
 
               <button class="btn btn--main" type="submit">
                 <svg
@@ -65,7 +66,7 @@
 
             <div class="auth__action">
               <p>Already have an account?</p>
-              <a href="login.html" class="btn btn--link">Log In</a>
+              <a href="{% url 'login' %}" class="btn btn--link">Log In</a>
             </div>
           </div>
         </div>
